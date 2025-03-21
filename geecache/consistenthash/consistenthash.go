@@ -11,9 +11,9 @@ type Hash func(data []byte) uint32
 
 type Map struct {
 	hash     Hash
-	replicas int   // 虚拟节点倍数
-	keys     []int //哈希环
-	hashMap  map[int]string
+	replicas int            // 虚拟节点倍数
+	keys     []int          //哈希环存储的虚拟节点
+	hashMap  map[int]string //虚拟节点与真实节点的映射表
 }
 
 func New(replicas int, fn Hash) *Map {
