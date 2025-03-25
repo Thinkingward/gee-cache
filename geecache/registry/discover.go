@@ -19,7 +19,7 @@ func DialPeer(c *clientv3.Client, service string) (conn *grpc.ClientConn, err er
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
-	return grpc.Dial(
+	return grpc.DialContext(ctx,
 		"etcd:///"+service,
 		grpc.WithResolvers(PeerResolver),
 		grpc.WithTransportCredentials(insecure.NewCredentials()),

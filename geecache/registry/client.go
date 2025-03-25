@@ -3,7 +3,7 @@ package registry
 import (
 	"context"
 	"fmt"
-	pb "geecahce/geecachepb"
+	pb "geecache/geecachepb"
 	"log"
 	"time"
 )
@@ -25,7 +25,7 @@ func (c *Client) Get(group string, key string) ([]byte, error) {
 	}
 	defer conn.Close()
 	//创建grpc客户端，调用远程peer的get方法
-	grpcClient := pb.NewGeeCacheClient(conn)
+	grpcClient := pb.NewGroupCacheClient(conn)
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
 	resp, err := grpcClient.Get(ctx, &pb.GetRequest{
@@ -48,7 +48,7 @@ func (c *Client) Set(group string, key string, value []byte, expire time.Time, i
 	defer conn.Close()
 
 	//创建grpc客户端，调用远程peer的get方法
-	grpcClient := pb.NewGeeCacheClient(conn)
+	grpcClient := pb.NewGroupCacheClient(conn)
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
 	resp, err := grpcClient.Set(ctx, &pb.SetRequest{

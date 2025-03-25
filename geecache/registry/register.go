@@ -2,13 +2,13 @@ package registry
 
 //提供服务Service注册至etcd的能力
 import (
-	"context"
 	"fmt"
 	"log"
 	"time"
 
 	clientv3 "go.etcd.io/etcd/client/v3"
 	"go.etcd.io/etcd/client/v3/naming/endpoints"
+	"golang.org/x/net/context"
 )
 
 var (
