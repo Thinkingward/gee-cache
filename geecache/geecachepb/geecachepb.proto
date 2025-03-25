@@ -4,15 +4,28 @@ option go_package = "./;geecachepb";
 
 package geecachepb;
 
-message Request {
+message GetRequest {
     string group=1;
     string key=2;
 }
 
-message Response {
+message GetResponse {
     bytes value=1;
 }
 
+message SetRequest{
+    string group=1;
+    string key=2;
+    bytes value=3;
+    int64 expire=4;
+    bool ishot=5;
+}
+
+message SetResponse{
+    bool ok=1;
+}
+
 service GroupCache {
-    rpc Get(Request) returns (Response);
+    rpc Get(GetRequest) returns (GetResponse);
+    rpc Set(SetRequest) returns (SetResponse);
 }

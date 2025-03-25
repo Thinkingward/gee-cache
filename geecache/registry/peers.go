@@ -1,6 +1,8 @@
-package geecache
+package registry
 
-import pb "geecache/geecachepb"
+import "time"
+
+//peers是用于rpc交流的模块
 
 //根据传入的key选择相应节点PeerGetter
 type PeerPicker interface {
@@ -9,5 +11,6 @@ type PeerPicker interface {
 
 //从对应的group查找缓存值
 type PeerGetter interface {
-	Get(in *pb.Request, out *pb.Response) error
+	Get(group string, key string) ([]byte, error)
+	Set(group string, key string, value []byte, expire time.Time, ishot bool) error
 }
